@@ -6,7 +6,7 @@ from typing import override
 from deepflow_engine.publisher.base import BasePublisher
 
 
-def get_telegram_bot_token() -> str:
+def get_telegram_bot_token() -> str | None:
     return os.getenv("TELEGRAM_BOT_TOKEN")
 
 

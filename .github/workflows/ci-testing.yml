@@ -101,5 +101,5 @@ jobs:
 
       - name: Run mypy type checking
         run: |
-          uv install mypy
+          uv pip install mypy
           mypy
