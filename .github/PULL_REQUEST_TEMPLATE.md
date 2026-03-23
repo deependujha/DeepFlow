@@ -8,15 +8,11 @@
 
 </details>
 
-______________________________________________________________________
-
 ## What does this PR do?
 
 <!-- Explain the change clearly. What problem does it solve? -->
 
 Fixes # (issue)
-
-______________________________________________________________________
 
 ## Type of change
 
@@ -24,8 +20,6 @@ ______________________________________________________________________
 - [ ] New feature
 - [ ] Refactor
 - [ ] Docs / cleanup
-
-______________________________________________________________________
 
 ## How to test
 
@@ -36,28 +30,10 @@ ______________________________________________________________________
 python your_script.py
 ```
 
-______________________________________________________________________
-
 ## Notes for reviewers
 
 <!-- Anything specific to focus on? tradeoffs? -->
 
-______________________________________________________________________
-
 ## Screenshots / Output (if relevant)
 
 <!-- Especially useful for rendered videos / frames -->
-
-______________________________________________________________________
-
-## Philosophy check
-
-- [ ] This keeps DeepFlow simple
-- [ ] This improves the render / timeline / publish pipeline
-- [ ] This doesn’t over-engineer things
-
-______________________________________________________________________
-
-## Did you have fun?
-
-You better have 😄
