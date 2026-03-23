@@ -71,11 +71,11 @@ jobs:
 
       - name: Run ruff check
         run: |
-          uv run ruff check src/ tests/ main.py silence/main.py || true
+          uv run ruff check src/ tests/
 
       - name: Run pre-commit hooks
         run: |
-          uv run pre-commit run --all-files || true
+          uv run pre-commit run --all-files
 
   type-check:
     name: Type Checking with mypy
@@ -101,5 +101,4 @@ jobs:
 
       - name: Run mypy type checking
         run: |
-          uv pip install mypy
-          mypy
+          uv run mypy
