@@ -29,9 +29,11 @@ scripts.deepflow_engine = "deepflow_engine:main"
 [dependency-groups]
 dev = [
   "pre-commit>=4.5.1",
+  "pyright>=1.1.350",
   "pytest>=7.4",
   "pytest-cov>=4.1",
   "pytest-xdist>=3.3.1",
+  "ruff>=0.3",
 ]
 
 [tool.pytest.ini_options]
