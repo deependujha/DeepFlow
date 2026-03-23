@@ -55,7 +55,7 @@ class DeepFlowEngine:
 
         self.frames_dir = Path(frames_dir) if frames_dir is not None else None
 
-        self.collision_log: list[dict] = []
+        self.collision_log: list[Event] = []
         self.collision_filename = collision_filename
         self.curr_frame: int | None = None
 
@@ -119,6 +119,7 @@ class DeepFlowEngine:
                 self._tick()
                 self._step()
         else:
+            assert self.total_frames is not None
             for frame in range(self.total_frames):
                 print(f"{frame=}")
                 self.curr_frame = frame
@@ -127,6 +128,7 @@ class DeepFlowEngine:
 
     def _tick(self) -> None:
         """Update delta time."""
+        assert self._clock is not None
         dt = self._clock.tick(self.fps) / 1000.0
         self.game.dt = dt
 

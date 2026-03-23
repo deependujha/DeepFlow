@@ -71,14 +71,14 @@ jobs:
 
       - name: Run ruff check
         run: |
-          uv run ruff check src/ tests/ main.py silence/main.py || true
+          uv run ruff check src/ tests/
 
       - name: Run pre-commit hooks
         run: |
-          uv run pre-commit run --all-files || true
+          uv run pre-commit run --all-files
 
   type-check:
-    name: Type Checking with Pylance
+    name: Type Checking with mypy
     runs-on: ubuntu-latest
 
     steps:
@@ -99,6 +99,6 @@ jobs:
         run: |
           uv sync --all-groups
 
-      - name: Run pyright type checking
+      - name: Run mypy type checking
         run: |
-          uv run pyright src/ || true
+          uv run mypy

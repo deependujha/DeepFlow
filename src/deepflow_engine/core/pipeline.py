@@ -12,7 +12,7 @@ def run_pipeline(
     engine: DeepFlowEngine,
     *,
     output_video: str | Path = "deepflow_output.mp4",
-    audio_map: dict[str, str] | None = None,
+    audio_map: dict[str, str | Path] | None = None,
     publish: bool = False,
 ) -> Path | None:
     """Run game and optionally generate video.
@@ -45,6 +45,10 @@ def run_pipeline(
         print("DeepFlow: No audio events logged. Generating silent video.")
 
     output_path = Path(output_video)
+
+    assert engine.frames_dir is not None, (
+        "Frames directory must be set in headless mode."
+    )
 
     video_renderer(
         output_filename=output_path,

@@ -1,6 +1,7 @@
 # credits: https://github.com/deependujha
 
 from abc import ABC, abstractmethod
+from pathlib import Path
 from dataclasses import dataclass
 from deepflow_engine.errors import PublisherError
 
@@ -22,10 +23,10 @@ class BasePublisher(ABC):
         return "\n".join(components)
 
     @abstractmethod
-    def _publish(self, filename: str, msg: str) -> None:
+    def _publish(self, filename: str | Path, msg: str) -> None:
         pass
 
-    def publish(self, filename: str, metadata: VideoMetadata) -> None:
+    def publish(self, filename: str | Path, metadata: VideoMetadata) -> None:
         try:
             parsed_metadata = self.parse_metadata(metadata)
             self._publish(filename, parsed_metadata)
