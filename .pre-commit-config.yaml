@@ -8,6 +8,14 @@ ci:
   # submodules: true
 
 repos:
+  - repo: local # local scripts
+    hooks:
+      - id: credits-script
+        name: Run Credits Script
+        entry: ./scripts/credits.sh
+        language: script
+        pass_filenames: false
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -77,11 +85,3 @@ repos:
     rev: v0.24.1
     hooks:
       - id: validate-pyproject
-
-  - repo: local
-    hooks:
-      - id: credits-script
-        name: Run Credits Script
-        entry: ./scripts/credits.sh
-        language: script
-        pass_filenames: false
