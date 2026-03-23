@@ -32,21 +32,22 @@ def get_sorted_base_frames(frames_dir: Path) -> list[Path]:
 # ----------------------------
 # Load Events
 # ----------------------------
-def load_collisions(log_path: Path) -> set[Event]:
+def load_collisions(log_path: Path) -> list[Event]:
     if not log_path.exists():
         raise RendererError(f"{log_path} not found.")
 
     with open(log_path) as fh:
         data = json.load(fh)
 
-    return {Event(**entry) for entry in data}
+    return [Event(**entry) for entry in data]
 
 
 # ----------------------------
 # Validation
 # ----------------------------
-def validate_audio_map(audio_map: dict[str, Path]) -> None:
+def validate_audio_map(audio_map: dict[str, str | Path]) -> None:
     for event_type, path in audio_map.items():
+        path = Path(path)
         if not path.exists():
             raise RendererError(
                 f"Audio file for event '{event_type}' not found: {path}"
@@ -54,7 +55,7 @@ def validate_audio_map(audio_map: dict[str, Path]) -> None:
 
 
 def validate_event_audio_mapping(
-    events: set[Event], audio_map: dict[str, Path]
+    events: list[Event], audio_map: dict[str, str | Path]
 ) -> None:
     missing = {event.name for event in events if event.name not in audio_map.keys()}
     print(f"{missing=}, {audio_map=}, {events=}")
@@ -110,8 +111,8 @@ def write_concat_list(sequence: list[Path], list_path: Path, FPS: int) -> None:
 # ----------------------------
 def build_ffmpeg_cmd(
     concat_list: Path,
-    events: set[Event],
-    audio_map: dict[str, Path],
+    events: list[Event],
+    audio_map: dict[str, str | Path],
     video_duration: float,
     output: Path,
 ) -> list[str]:
@@ -133,7 +134,7 @@ def build_ffmpeg_cmd(
         audio_inputs.append((event, audio_path))
 
     for _, path in audio_inputs:
-        cmd += ["-i", str(path.resolve())]
+        cmd += ["-i", str(Path(path).resolve())]
 
     # --- video encoding ---
     cmd += [
@@ -206,6 +207,10 @@ def video_renderer(
     if collisions_log is not None:
         collisions_log = Path(collisions_log)
         collisions_log_list = load_collisions(collisions_log)
+
+    assert collisions_log_list is not None, (
+        "collisions_log_list should be set at this point."
+    )
 
     frames_dir = Path(frames_dir)
     output_video = Path(output_filename)

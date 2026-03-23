@@ -3,6 +3,7 @@
 import os
 import telebot
 from typing import override
+from pathlib import Path
 from deepflow_engine.publisher.base import BasePublisher
 
 
@@ -19,7 +20,7 @@ class TelegramPublisher(BasePublisher):
         self._chat_id = "-1003780272239"  # oddly_realm group
 
     @override
-    def _publish(self, filename: str, msg: str) -> None:
+    def _publish(self, filename: str | Path, msg: str) -> None:
         video = open(filename, "rb")
         self._bot.send_video(chat_id=self._chat_id, video=video, caption=msg)
         video.close()

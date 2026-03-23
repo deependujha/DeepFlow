@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
+from pathlib import Path
 
 import pygame
 
@@ -34,7 +35,7 @@ class DeepFlowGame(ABC):
         self.dt: float = 0.0
 
         # Internal cache for audio mapping
-        self._audio_map: dict[str, str] | None = None
+        self._audio_map: dict[str, str | Path] | None = None
 
     # ------------------------------------------------------------------
     # Lifecycle
@@ -93,7 +94,7 @@ class DeepFlowGame(ABC):
     # ------------------------------------------------------------------
 
     @abstractmethod
-    def get_audio_map(self) -> dict[str, str]:
+    def get_audio_map(self) -> dict[str, str | Path]:
         """Return mapping of event name → audio file path.
 
         Example:
@@ -101,7 +102,7 @@ class DeepFlowGame(ABC):
         """
         pass
 
-    def _get_cached_audio_map(self) -> dict[str, str]:
+    def _get_cached_audio_map(self) -> dict[str, str | Path]:
         """Internal helper to cache audio map."""
         if self._audio_map is None:
             self._audio_map = self.get_audio_map()
