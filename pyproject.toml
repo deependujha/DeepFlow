@@ -29,4 +29,29 @@ scripts.deepflow_engine = "deepflow_engine:main"
 [dependency-groups]
 dev = [
   "pre-commit>=4.5.1",
+  "pytest>=7.4",
+  "pytest-cov>=4.1",
+  "pytest-xdist>=3.3.1",
 ]
+
+[tool.pytest.ini_options]
+addopts = "-v --strict-markers --tb=short"
+markers = [
+  "unit: Unit tests",
+  "integration: Integration tests",
+  "slow: Slow tests",
+]
+minversion = "7.0"
+python_classes = [ "Test*" ]
+python_files = [ "test_*.py", "*_test.py" ]
+python_functions = [ "test_*" ]
+testpaths = [ "tests" ]
+
+[tool.coverage.run]
+branch = true
+source = [ "src/deepflow" ]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
