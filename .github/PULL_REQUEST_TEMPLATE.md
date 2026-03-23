@@ -18,6 +18,7 @@ Fixes # (issue)
 
 - [ ] Bug fix
 - [ ] New feature
+- [ ] Breaking change
 - [ ] Refactor
 - [ ] Docs / cleanup
 
