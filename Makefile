@@ -36,4 +36,4 @@ clean:
 
 release:
 	chmod +x scripts/bump_version.sh
-	./scripts/bump_version.sh minor
+	./scripts/bump_version.sh
